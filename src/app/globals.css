@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #f2f2f7;
+  --card: #ffffff;
+  --card2: #f2f2f7;
+  --ink: #000000;
+  --ink2: rgba(60, 60, 67, 0.6);
+  --ink3: rgba(60, 60, 67, 0.3);
+  --sep: rgba(60, 60, 67, 0.16);
+  --accent: #007aff;
+  --good: #0ca30c;
+  --warn: #c98a00;
+  --bad: #d03b3b;
+  --band: rgba(12, 163, 12, 0.08);
+  --bar: rgba(249, 249, 249, 0.86);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #000000;
+    --card: #1c1c1e;
+    --card2: #2c2c2e;
+    --ink: #ffffff;
+    --ink2: rgba(235, 235, 245, 0.6);
+    --ink3: rgba(235, 235, 245, 0.3);
+    --sep: rgba(84, 84, 88, 0.55);
+    --accent: #0a84ff;
+    --good: #30c030;
+    --warn: #fab219;
+    --bad: #ff5b5b;
+    --band: rgba(48, 192, 48, 0.12);
+    --bar: rgba(22, 22, 23, 0.86);
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-card: var(--card);
+  --color-card2: var(--card2);
+  --color-ink: var(--ink);
+  --color-ink2: var(--ink2);
+  --color-ink3: var(--ink3);
+  --color-sep: var(--sep);
+  --color-accent: var(--accent);
+  --color-good: var(--good);
+  --color-warn: var(--warn);
+  --color-bad: var(--bad);
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  overscroll-behavior-y: none;
+}
+
+input,
+select,
+textarea {
+  font-size: 17px; /* below 16px iOS Safari zooms on focus */
+}
+
+.card {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+@media (prefers-color-scheme: dark) {
+  .card {
+    box-shadow: none;
+  }
+}
+
+.pt-safe {
+  padding-top: env(safe-area-inset-top);
+}
+.pb-tabbar {
+  padding-bottom: calc(env(safe-area-inset-bottom) + 84px);
+}
+.tap {
+  transition: opacity 0.15s, transform 0.15s;
+}
+.tap:active {
+  opacity: 0.6;
+  transform: scale(0.98);
+}
+
+/* Health map family tree: each <li> draws its own connector up to the parent row. */
+.ftree,
+.ftree ul {
+  display: flex;
+  justify-content: center;
+}
+.ftree ul {
+  position: relative;
+  padding-top: 14px;
+}
+.ftree ul::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 14px;
+  border-left: 2px solid var(--color-ink3);
+}
+.ftree li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px 3px 0;
+  list-style: none;
+}
+.ftree > li {
+  padding-top: 0;
+}
+.ftree ul > li::before,
+.ftree ul > li::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 50%;
+  width: 50%;
+  height: 14px;
+  border-top: 2px solid var(--color-ink3);
+}
+.ftree ul > li::after {
+  right: auto;
+  left: 50%;
+  border-left: 2px solid var(--color-ink3);
+}
+.ftree ul > li:first-child::before,
+.ftree ul > li:last-child::after {
+  border-top: 0;
+}
+.ftree ul > li:only-child::before {
+  display: none;
+}
+.ftree ul > li:last-child::before {
+  border-right: 2px solid var(--color-ink3);
+  border-top-right-radius: 8px;
+}
+.ftree ul > li:last-child::after {
+  border-left: 0;
+}
+.ftree ul > li:first-child::after {
+  border-top-left-radius: 8px;
+}
+.ftree ul > li:only-child::after {
+  border-left: 2px solid var(--color-ink3);
+  border-radius: 0;
+}
